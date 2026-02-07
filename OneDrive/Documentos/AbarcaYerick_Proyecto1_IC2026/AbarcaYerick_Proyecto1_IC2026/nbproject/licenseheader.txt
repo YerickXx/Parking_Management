@@ -1,0 +1,11 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Yerick Fauricio Abarca Nunez
+${licensePrefix}Grupo 03
+${licensePrefix}Programacion Intermedia
+${licensePrefix}Primer Cuatrimestre 2026
+${licensePrefix}Each line should be prefixed with ${licensePrefix}
+<#if licenseLast??>
+${licenseLast}
+</#if>
