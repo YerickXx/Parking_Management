@@ -24,6 +24,7 @@ public class GestorParqueo {
 
     Vehiculo vehiculo = new Vehiculo();
     List<Vehiculo> autos = new LinkedList<>(); // almacenamiento de los medios de transporte
+    ServicioParqueo services = new ServicioParqueo();
 
     public void Register_Vehicle() {
         Scanner scanner = new Scanner(System.in);
@@ -36,10 +37,12 @@ public class GestorParqueo {
                     for (int i = 0; i <= ops.length(); i++) // loop de validacion para un largo de cadena de 6 caracteres
                     {
                         if (i == 6) {
-                            if (ops.matches("^[a-zA-Z]{3}[0-9]+$") && !ops.equals(vehiculo.getPlate())) // Expresion regular para validar el valor AlphaNumerico de la placa
+
+                            if (ops.matches("^[a-zA-Z]{3}[0-9]+$") && !vehiculo.getPlate().equalsIgnoreCase(ops)) // Expresion regular para validar el valor AlphaNumerico de la placa
                             {
+                                    
                                     vehiculo.setPlate(ops.toUpperCase());
-                                    state = true; // estado cambia a verdadero para salir del loop de validacion
+                                    state = true;// estado cambia a verdadero para salir del loop de validacion
                                
                             } else {
                                 System.out.println("Se produjo un error en el ingreso de datos intente nuevamente!");
@@ -74,23 +77,50 @@ public class GestorParqueo {
                 }
             }
             String type = vehiculo.getType();
-
+            
+            System.out.println("Seleccione el tipo de servicio que desea adquirir: ");
+            System.out.println("1. Servicio por hora");
+            System.out.println("2. Servicio por dia");
+            System.out.print("Seleccione su opcion: ");
+            Integer service = scanner.nextInt();
+             switch (service) {
+                case 1 -> {
+                    vehiculo.setService("Por Hora");
+                    services.Calculo_Pago_Hora(type);
+                    break;
+                }
+                case 2 -> {
+                    vehiculo.setService("Por dia");
+                    services.Calculo_Pago_dia(type);
+                    break;
+                }
+            }
+             String Service_type = vehiculo.getService();
             // Setteo automatico de fecha y hora de registro
             LocalDateTime Enter_Date = LocalDateTime.now();
             DateTimeFormatter Format_Date = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); // formato de fecha y hora
             String formattedDate = Format_Date.format(Enter_Date);
             vehiculo.setEnter_Time(formattedDate);
             String enter = vehiculo.getEnter_Time();
+            
 
-            Vehiculo vehiculo2 = new Vehiculo(plate, type, enter, "Saliendo");
+            Vehiculo vehiculo2 = new Vehiculo(plate, type, enter, "Saliendo",Service_type);
             autos.add(vehiculo2);
-            for (Vehiculo auto : autos) {
-                System.out.println(auto);
-            }
-
+            String d = services.Opciones_Tiempo(vehiculo2);
+           
+            System.out.println("=======================");
+            System.out.println("          RECIBO         ");
+            System.out.println("=======================");
+            System.out.println("Matricula registrada......."+ plate);
+            System.out.println("Tipo de vehiculo......."+ type);
+            System.out.println("Fecha y hora de ingreso al recinto......."+ enter);
+            System.out.println("Servicio solicitado......."+ Service_type);
+            System.out.println( d);
+            
+             
         } catch (InputMismatchException error) {
             System.out.println("Debe ingresar solamente los datos que le solicitan intente de nuevo!");
-            //scanner.next();
         }
     }
+   
 }
