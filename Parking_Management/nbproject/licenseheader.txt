@@ -1,0 +1,11 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Yerick Fauricio Abarca
+${licensePrefix}Programacion intermedia
+${licensePrefix} Grupo 03
+${licensePrefix}Primer Cuatrimestre 2026
+${licensePrefix}Tutor:AMADOR SALAZAR OSCAR ANDRES
+<#if licenseLast??>
+${licenseLast}
+</#if>
