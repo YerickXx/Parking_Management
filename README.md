@@ -20,12 +20,3 @@ This project follows a **Layered Architecture** to ensure high technical standar
 * **Environment:** NetBeans IDE
 * **Version Control:** Git & GitHub
 
-## 📂 Project Structure
-```text
-Parking_Management/
-├── src/
-│   ├── main/           # Application entry point
-│   ├── Objetos/        # Domain entities (Vehicles, Rates, etc.)
-│   └── Logica/         # Business rules and fee processing
-├── nbproject/          # NetBeans configuration (local)
-└── .gitignore          # Git exclusion rules
